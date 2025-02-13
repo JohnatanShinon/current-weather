@@ -1,33 +1,22 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aplicativo de Clima</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aplicativo de Clima</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="app">
-        <header>
-            <h1>Previsão do Tempo</h1>
-            <button id="themeButton"><span id="themeIcon">🌙</span></button>
-        </header>
-        <main>
-            <div id="search">
-                <input type="text" id="searchInput" placeholder="Digite uma cidade">
-                <button id="searchButton">Buscar</button>
-            </div>
-            <div id="weather-info">
-                <p id="location">Localização</p>
-                <img id="weather-icon" src="" alt="Ícone do clima">
-                <p id="temperature">--°C</p>
-                <p id="description">Carregando...</p>
-                <p id="feels-like">Sensação: --°C</p>
-                <p id="humidity">Umidade: --%</p>
-                <p id="wind">Vento: -- km/h (--)</p>
-            </div>
-        </main>
+  <div class="container">
+    <h1>Previsão do Tempo</h1>
+    <div class="theme-toggle">
+      <button id="themeButton">🌙</button>
     </div>
-    <script src="script.js"></script>
+    <input type="text" id="searchInput" placeholder="Digite uma cidade">
+    <button id="searchButton">Buscar</button>
+    <div id="weatherResult"></div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
