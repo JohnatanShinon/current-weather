@@ -1,4 +1,4 @@
-// Função para verificar a hora atual e definir o tema
+// Alternar Tema Automático com Base na Hora
 function setThemeBasedOnTime() {
   const now = new Date();
   const hour = now.getHours(); // Obtém a hora atual (0-23)
@@ -34,7 +34,7 @@ themeButton.addEventListener('click', () => {
   }
 });
 
-// Restante do código permanece igual
+// Buscar Clima Atual
 document.getElementById('getWeatherBtn').addEventListener('click', function () {
   const city = document.getElementById('cityInput').value;
   if (!city) {
@@ -45,56 +45,48 @@ document.getElementById('getWeatherBtn').addEventListener('click', function () {
 });
 
 function getWeatherReport(cityName) {
-  const accuweatherToken = 'QIEVUx0jvG91HHWq9xTrbpgtGSnSiA94'; // Substitua pela sua chave da API da AccuWeather
+  const openWeatherToken = 'e7314838ebd86431d951d53c59e7fd20'; // Substitua pela sua chave da API da OpenWeatherMap
 
-  // Etapa 1: Obter a chave de localização
-  fetch(`http://dataservice.accuweather.com/locations/v1/cities/search?apikey=${accuweatherToken}&q=${encodeURIComponent(cityName)}`)
-    .then(response => response.json())
-    .then(data => {
-      if (data.length === 0) {
-        throw new Error('Cidade não encontrada.');
+  // URL da API para buscar o clima atual por nome da cidade
+  const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(cityName)}&appid=${openWeatherToken}&units=metric&lang=pt_br`;
+
+  fetch(apiUrl)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`Erro na API: ${response.status} - ${response.statusText}`);
       }
-      const locationKey = data[0].Key;
-      const cityName = data[0].LocalizedName;
-      return { locationKey, cityName };
+      return response.json();
     })
-    .then(({ locationKey, cityName }) => {
-      // Etapa 2: Obter o relatório do clima atual
-      return fetch(`http://dataservice.accuweather.com/currentconditions/v1/${locationKey}?apikey=${accuweatherToken}&details=true`)
-        .then(response => response.json())
-        .then(weatherData => {
-          const weather = weatherData[0];
-          displayWeatherReport(cityName, weather);
-        });
+    .then(data => {
+      displayWeatherReport(cityName, data);
     })
     .catch(error => {
+      console.error(error); // Registra o erro no console para depuração
       document.getElementById('weatherResult').innerHTML += `<p style="color: red;">Erro ao buscar relatório do clima para "${cityName}": ${error.message}</p>`;
     });
 }
 
 function displayWeatherReport(cityName, weather) {
-  const temp = weather.Temperature.Metric.Value;
-  const feelsLike = weather.RealFeelTemperature.Metric.Value;
-  const description = translateCondition(weather.WeatherText);
-  const humidity = weather.RelativeHumidity;
-  const windSpeed = weather.Wind.Speed.Metric.Value;
-  const windDirection = translateWindDirection(weather.Wind.Direction.Localized);
-  const uvIndex = weather.UVIndex;
-  const pressure = weather.Pressure.Metric.Value;
-  const visibility = weather.Visibility.Metric.Value;
-  const cloudCover = weather.CloudCover;
+  const temp = weather.main.temp; // Temperatura em °C
+  const feelsLike = weather.main.feels_like; // Sensação térmica em °C
+  const description = weather.weather[0].description; // Descrição do clima (já traduzida para pt-br)
+  const humidity = weather.main.humidity; // Umidade em %
+  const windSpeed = weather.wind.speed; // Velocidade do vento em m/s
+  const windDirection = translateWindDirection(weather.wind.deg); // Direção do vento
+  const pressure = weather.main.pressure; // Pressão atmosférica em hPa
+  const visibility = weather.visibility / 1000; // Visibilidade em km
+  const cloudCover = weather.clouds.all; // Cobertura de nuvens em %
 
   const message = `
     <div class="weather-card">
       <h2>Clima Atual em ${cityName}</h2>
       <p><strong>Temperatura:</strong> ${temp}°C</p>
       <p><strong>Sensação Térmica:</strong> ${feelsLike}°C</p>
-      <p><strong>Condição:</strong> ${description}</p>
+      <p><strong>Condição:</strong> ${capitalizeFirstLetter(description)}</p>
       <p><strong>Umidade:</strong> ${humidity}%</p>
-      <p><strong>Vento:</strong> ${windSpeed} km/h (${windDirection})</p>
-      <p><strong>Índice UV:</strong> ${translateUVIndex(uvIndex)}</p>
+      <p><strong>Vento:</strong> ${windSpeed} m/s (${windDirection})</p>
       <p><strong>Pressão Atmosférica:</strong> ${pressure} hPa</p>
-      <p><strong>Visibilidade:</strong> ${visibility} km</p>
+      <p><strong>Visibilidade:</strong> ${visibility.toFixed(1)} km</p>
       <p><strong>Cobertura de Nuvens:</strong> ${cloudCover}%</p>
     </div>
   `;
@@ -103,69 +95,14 @@ function displayWeatherReport(cityName, weather) {
   document.getElementById('weatherResult').innerHTML += message;
 }
 
-// Traduz condições meteorológicas
-function translateCondition(condition) {
-  const conditions = {
-    'Clear': 'Céu Limpo',
-    'Partly Cloudy': 'Parcialmente Nublado',
-    'Cloudy': 'Nublado',
-    'Rain': 'Chuva',
-    'Snow': 'Neve',
-    'Thunderstorm': 'Trovoada',
-    'Fog': 'Nevoeiro',
-    'Haze': 'Neblina',
-    'Showers': 'Pancadas de Chuva',
-    'Drizzle': 'Garoa',
-    'Sunny': 'Ensolarado',
-    'Mostly Sunny': 'Predominantemente Ensolarado',
-    'Partly Sunny': 'Parcialmente Ensolarado',
-    'Mostly Cloudy': 'Predominantemente Nublado',
-    'Overcast': 'Encoberto',
-    'T-Storms': 'Tempestades',
-    'Light Rain': 'Chuva Leve',
-    'Heavy Rain': 'Chuva Forte',
-    'Freezing Rain': 'Chuva Congelante',
-    'Sleet': 'Granizo',
-    'Flurries': 'Flocos de Neve',
-    'Blizzard': 'Nevasca',
-    'Dust': 'Poeira',
-    'Smoke': 'Fumaça',
-    'Hail': 'Granizo',
-    'Windy': 'Ventoso',
-    'Light snow': 'Neve leve',
-    'Heavy snow': 'Neve forte',
-  };
-  return conditions[condition] || condition; // Retorna a tradução ou a condição original se não houver tradução disponível
-}
-
 // Traduz direção do vento
-function translateWindDirection(direction) {
-  const directions = {
-    'N': 'Norte',
-    'NNE': 'Norte-Nordeste',
-    'NE': 'Nordeste',
-    'ENE': 'Leste-Nordeste',
-    'E': 'Leste',
-    'ESE': 'Leste-Sudeste',
-    'SE': 'Sudeste',
-    'SSE': 'Sul-Sudeste',
-    'S': 'Sul',
-    'SSW': 'Sul-Sudoeste',
-    'SW': 'Sudoeste',
-    'WSW': 'Oeste-Sudoeste',
-    'W': 'Oeste',
-    'WNW': 'Oeste-Noroeste',
-    'NW': 'Noroeste',
-    'NNW': 'Norte-Noroeste',
-  };
-  return directions[direction] || direction;
+function translateWindDirection(degrees) {
+  const directions = ['Norte', 'Norte-Nordeste', 'Nordeste', 'Leste-Nordeste', 'Leste', 'Leste-Sudeste', 'Sudeste', 'Sul-Sudeste', 'Sul', 'Sul-Sudoeste', 'Sudoeste', 'Oeste-Sudoeste', 'Oeste', 'Oeste-Noroeste', 'Noroeste', 'Norte-Noroeste'];
+  const index = Math.round((degrees % 360) / 22.5);
+  return directions[index];
 }
 
-// Traduz índice UV
-function translateUVIndex(uvIndex) {
-  if (uvIndex <= 2) return 'Baixo';
-  if (uvIndex <= 5) return 'Moderado';
-  if (uvIndex <= 7) return 'Alto';
-  if (uvIndex <= 10) return 'Muito Alto';
-  return 'Extremo';
+// Capitaliza a primeira letra de uma string
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
 }
