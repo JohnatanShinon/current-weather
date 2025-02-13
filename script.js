@@ -32,12 +32,9 @@ function fetchWeather(cityName) {
 }
 
 function displayWeather(weather) {
-  const weatherResult = document.getElementById('weatherResult');
-  weatherResult.innerHTML = `
-    <div class="weather-card">
-      <p><strong>${weather.name}</strong></p>
-      <p>${Math.round(weather.main.temp)}°C</p>
-      <p>${weather.weather[0].description}</p>
-    </div>
+  const mainInfo = document.getElementById('main-info');
+  mainInfo.innerHTML = `
+    ${Math.round(weather.main.temp)}°C<br>
+    <small>${weather.weather[0].description}</small>
   `;
 }
