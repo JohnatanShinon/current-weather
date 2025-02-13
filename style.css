@@ -1,57 +1,36 @@
 /* Estilo Base (Tema Claro) */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: Roboto, sans-serif;
   background-color: #fff;
   color: #000;
+  margin: 0;
+  padding: 0;
   display: flex;
-  justify-content: center; /* Centraliza horizontalmente */
-  align-items: center; /* Centraliza verticalmente */
-  height: 100vh; /* Garante que o body ocupe toda a altura da tela */
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
   transition: background-color 0.3s, color 0.3s; /* Animação suave */
 }
 
 .container {
   text-align: center;
   background: #fff;
-  padding: 30px; /* Espaçamento maior */
+  padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  max-width: 400px; /* Largura máxima para telas grandes */
-  width: 90%; /* Ajusta para telas menores */
   transition: background-color 0.3s, box-shadow 0.3s;
 }
 
 h1 {
-  font-size: 2rem;
-  font-weight: 300;
   color: #999;
-  margin-bottom: 20px;
-  letter-spacing: 1px;
-}
-
-p {
-  font-size: 1rem;
-  color: #555;
-  margin-bottom: 20px;
 }
 
 input {
   padding: 10px;
-  width: 100%; /* Ocupa toda a largura disponível */
+  width: 80%;
   margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  transition: border-color 0.3s;
-}
-
-input:focus {
-  border-color: #007bff; /* Destaca o campo de entrada quando focado */
 }
 
 button {
@@ -61,8 +40,6 @@ button {
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  width: 100%; /* Ocupa toda a largura disponível */
-  transition: background-color 0.3s;
 }
 
 button:hover {
@@ -81,14 +58,12 @@ button:hover {
   padding: 15px;
   margin-bottom: 15px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s, border-color 0.3s;
 }
 
 .theme-toggle {
   position: absolute;
   top: 20px;
   right: 20px;
-  z-index: 10; /* Garante que o botão fique acima de outros elementos */
 }
 
 #themeButton {
@@ -96,12 +71,6 @@ button:hover {
   border: none;
   font-size: 24px;
   cursor: pointer;
-  color: #007bff;
-  transition: color 0.3s;
-}
-
-#themeButton:hover {
-  color: #0056b3;
 }
 
 /* Estilo para o Tema Escuro */
@@ -113,14 +82,6 @@ body.dark-mode {
 body.dark-mode .container {
   background-color: #1e1e1e;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-}
-
-body.dark-mode h1 {
-  color: #bb86fc; /* Cor ajustada para combinar com o tema escuro */
-}
-
-body.dark-mode p {
-  color: #c7c7c7; /* Cor mais clara para melhor legibilidade */
 }
 
 body.dark-mode input {
@@ -138,6 +99,12 @@ body.dark-mode button:hover {
 }
 
 body.dark-mode .weather-card {
-  background-color: #222; /* Tom mais claro para melhor contraste */
+  background-color: #333;
   border-color: #555;
+}
+
+body.h1.dark-mode {
+  color: #000;
+  border-letter-spacing: 2px;
+  border-color: #fff;
 }
