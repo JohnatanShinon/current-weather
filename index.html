@@ -1,27 +1,33 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Clima Atual</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplicativo de Clima</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- Botão de Alternância de Tema -->
-  <div class="theme-toggle">
-    <button id="themeButton" aria-label="Alternar Tema">
-      <span id="themeIcon">🌙</span> <!-- Ícone inicial: Lua -->
-    </button>
-  </div>
-
-  <div class="container">
-    <h1>Clima Atual</h1>
-    <p>Digite o nome da cidade para obter informações do clima atual:</p>
-    <input type="text" id="cityInput" placeholder="Ex: São Paulo">
-    <button id="getWeatherBtn">Buscar informações</button>
-    <div id="weatherResult"></div>
-  </div>
-
-  <script src="script.js"></script>
+    <div id="app">
+        <header>
+            <h1>Previsão do Tempo</h1>
+            <button id="themeButton"><span id="themeIcon">🌙</span></button>
+        </header>
+        <main>
+            <div id="search">
+                <input type="text" id="searchInput" placeholder="Digite uma cidade">
+                <button id="searchButton">Buscar</button>
+            </div>
+            <div id="weather-info">
+                <p id="location">Localização</p>
+                <img id="weather-icon" src="" alt="Ícone do clima">
+                <p id="temperature">--°C</p>
+                <p id="description">Carregando...</p>
+                <p id="feels-like">Sensação: --°C</p>
+                <p id="humidity">Umidade: --%</p>
+                <p id="wind">Vento: -- km/h (--)</p>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
