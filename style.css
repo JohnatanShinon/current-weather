@@ -23,6 +23,7 @@ body {
 
 h1 {
   color: #999;
+  margin-bottom: 20px;
 }
 
 input {
@@ -31,6 +32,7 @@ input {
   margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  transition: background-color 0.3s, border-color 0.3s;
 }
 
 button {
@@ -40,6 +42,7 @@ button {
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 button:hover {
@@ -58,6 +61,7 @@ button:hover {
   padding: 15px;
   margin-bottom: 15px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, border-color 0.3s;
 }
 
 .theme-toggle {
@@ -71,6 +75,12 @@ button:hover {
   border: none;
   font-size: 24px;
   cursor: pointer;
+  color: #007bff;
+  transition: color 0.3s;
+}
+
+#themeButton:hover {
+  color: #0056b3;
 }
 
 /* Estilo para o Tema Escuro */
@@ -103,8 +113,7 @@ body.dark-mode .weather-card {
   border-color: #555;
 }
 
-body.h1.dark-mode {
-  color: #000;
-  border-letter-spacing: 2px;
-  border-color: #fff;
+/* Correção para o título no modo escuro */
+body.dark-mode h1 {
+  color: #bb86fc; /* Cor ajustada para combinar com o tema escuro */
 }
