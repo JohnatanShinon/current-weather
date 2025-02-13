@@ -48,7 +48,7 @@ function getWeatherReport(cityName) {
   const accuweatherToken = 'QIEVUx0jvG91HHWq9xTrbpgtGSnSiA94'; // Substitua pela sua chave da API da AccuWeather
 
   // Etapa 1: Obter a chave de localização
-  fetch(`http://dataservice.accuweather.com/locations/v1/cities/search?apikey=${accuweatherToken}&q=${encodeURIComponent(cityName)}`)
+  fetch(`https://dataservice.accuweather.com/locations/v1/cities/search?apikey=${accuweatherToken}&q=${encodeURIComponent(cityName)}`)
     .then(response => response.json())
     .then(data => {
       if (data.length === 0) {
@@ -60,7 +60,7 @@ function getWeatherReport(cityName) {
     })
     .then(({ locationKey, cityName }) => {
       // Etapa 2: Obter o relatório do clima atual
-      return fetch(`http://dataservice.accuweather.com/currentconditions/v1/${locationKey}?apikey=${accuweatherToken}&details=true`)
+      return fetch(`https://dataservice.accuweather.com/currentconditions/v1/${locationKey}?apikey=${accuweatherToken}&details=true`)
         .then(response => response.json())
         .then(weatherData => {
           const weather = weatherData[0];
