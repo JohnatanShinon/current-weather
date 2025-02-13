@@ -169,3 +169,44 @@ function translateUVIndex(uvIndex) {
   if (uvIndex <= 10) return 'Muito Alto';
   return 'Extremo';
 }
+
+function getSunriseAndSunset(lat, lon) {
+  const url = `https://api.sunrise-sunset.org/json?lat=${lat}&lng=${lon}&formatted=0`;
+  fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      const sunrise = new Date(data.results.sunrise);
+      const sunset = new Date(data.results.sunset);
+      const now = new Date();
+
+      if (now > sunrise && now < sunset) {
+        setTheme(false); // Tema claro durante o dia
+      } else {
+        setTheme(true); // Tema escuro à noite
+      }
+    })
+    .catch(error => {
+      console.error('Erro ao buscar informações de nascer e pôr do sol:', error);
+      setThemeBasedOnTime(); // Fallback para alternância baseada no horário
+    });
+}
+
+// Obter coordenadas do usuário
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(position => {
+      const lat = position.coords.latitude;
+      const lon = position.coords.longitude;
+      getSunriseAndSunset(lat, lon);
+    }, error => {
+      console.error('Erro ao obter localização:', error);
+      setThemeBasedOnTime(); // Fallback para alternância baseada no horário
+    });
+  } else {
+    console.error('Geolocalização não suportada pelo navegador.');
+    setThemeBasedOnTime(); // Fallback para alternância baseada no horário
+  }
+}
+
+// Executa a função ao carregar a página
+getLocation();
