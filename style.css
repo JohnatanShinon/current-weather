@@ -19,7 +19,7 @@ body {
 .container {
   text-align: center;
   background: #fff;
-  padding: 20px;
+  padding: 30px; /* Espaçamento maior */
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   max-width: 400px; /* Largura máxima para telas grandes */
@@ -33,6 +33,12 @@ h1 {
   color: #999;
   margin-bottom: 20px;
   letter-spacing: 1px;
+}
+
+p {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 20px;
 }
 
 input {
@@ -82,6 +88,7 @@ button:hover {
   position: absolute;
   top: 20px;
   right: 20px;
+  z-index: 10; /* Garante que o botão fique acima de outros elementos */
 }
 
 #themeButton {
@@ -108,6 +115,14 @@ body.dark-mode .container {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
+body.dark-mode h1 {
+  color: #bb86fc; /* Cor ajustada para combinar com o tema escuro */
+}
+
+body.dark-mode p {
+  color: #c7c7c7; /* Cor mais clara para melhor legibilidade */
+}
+
 body.dark-mode input {
   background-color: #333;
   color: #e0e0e0;
@@ -123,10 +138,6 @@ body.dark-mode button:hover {
 }
 
 body.dark-mode .weather-card {
-  background-color: #333;
+  background-color: #222; /* Tom mais claro para melhor contraste */
   border-color: #555;
-}
-
-body.dark-mode h1 {
-  color: #bb86fc; /* Cor ajustada para combinar com o tema escuro */
 }
