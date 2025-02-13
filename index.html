@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clima Atual</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Botão de Alternância de Tema -->
+  <div class="theme-toggle">
+    <button id="themeButton" aria-label="Alternar Tema">
+      <span id="themeIcon">🌙</span> <!-- Ícone inicial: Lua -->
+    </button>
+  </div>
+
+  <div class="container">
+    <h1>Clima Atual</h1>
+    <p>Digite o nome da cidade para obter informações do clima atual:</p>
+    <input type="text" id="cityInput" placeholder="Ex: São Paulo">
+    <button id="getWeatherBtn">Buscar informações</button>
+    <div id="weatherResult"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
