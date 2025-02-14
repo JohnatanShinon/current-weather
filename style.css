@@ -1,8 +1,8 @@
 /* Estilo Base (Tema Claro) */
 body {
   font-family: Roboto, sans-serif;
-  background-color: #fff;
-  color: #000;
+  background-color: #fff; /* Fundo claro */
+  color: #000; /* Fonte preta */
   margin: 0;
   padding: 0;
   display: flex;
@@ -14,7 +14,7 @@ body {
 
 .container {
   text-align: center;
-  background: #fff;
+  background: #fff; /* Fundo claro */
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -22,7 +22,7 @@ body {
 }
 
 h1 {
-  color: #999;
+  color: #333; /* Título em tom mais escuro no tema claro */
 }
 
 input {
@@ -31,19 +31,23 @@ input {
   margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  background-color: #f9f9f9; /* Fundo claro para inputs */
+  color: #000; /* Fonte preta */
+  transition: background-color 0.3s, color 0.3s;
 }
 
 button {
   padding: 10px 20px;
-  background-color: #007bff;
+  background-color: #007bff; /* Azul no tema claro */
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 button:hover {
-  background-color: #0056b3;
+  background-color: #0056b3; /* Azul mais escuro ao passar o mouse */
 }
 
 #weatherResult {
@@ -52,12 +56,13 @@ button:hover {
 }
 
 .weather-card {
-  background-color: #f9f9f9;
+  background-color: #f9f9f9; /* Fundo claro para cards */
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 15px;
   margin-bottom: 15px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, border-color 0.3s;
 }
 
 .theme-toggle {
@@ -74,41 +79,41 @@ button:hover {
   transition: transform 0.3s;
 }
 
-#themeButton:hover
-transform: scale (1.1);
+#themeButton:hover {
+  transform: scale(1.1);
 }
+
 /* Estilo para o Tema Escuro */
 body.dark-mode {
-  background-color: #121212;
-  color: #e0e0e0;
+  background-color: #121212; /* Fundo escuro */
+  color: #e0e0e0; /* Fonte branca */
 }
 
 body.dark-mode .container {
-  background-color: #1e1e1e;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  background-color: #1e1e1e; /* Fundo escuro para container */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Sombra mais escura */
+}
+
+body.dark-mode h1 {
+  color: #bb86fc; /* Cor roxa clara para títulos no tema escuro */
 }
 
 body.dark-mode input {
-  background-color: #333;
-  color: #e0e0e0;
-  border-color: #555;
+  background-color: #333; /* Fundo escuro para inputs */
+  color: #e0e0e0; /* Fonte branca */
+  border-color: #555; /* Borda mais escura */
 }
 
 body.dark-mode button {
-  background-color: #bb86fc;
+  background-color: #bb86fc; /* Botão roxo no tema escuro */
+  color: white;
 }
 
 body.dark-mode button:hover {
-  background-color: #9c27b0;
+  background-color: #9c27b0; /* Roxo mais escuro ao passar o mouse */
 }
 
 body.dark-mode .weather-card {
-  background-color: #333;
-  border-color: #555;
-}
-
-body.h1.dark-mode {
-  color: #000;
-  border-letter-spacing: 2px;
-  border-color: #fff;
+  background-color: #333; /* Fundo escuro para cards */
+  border-color: #555; /* Borda mais clara no tema escuro */
 }
